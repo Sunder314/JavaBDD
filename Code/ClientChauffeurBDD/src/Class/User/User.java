@@ -1,21 +1,21 @@
 package Class.User;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class User {
 
     private String nom;
     private String prenom;
     private LocalDate date_naissance;
-    private LocalDate date_inscription;
     private TypeUser type;
 
     public User(){}
-    public User(String nom, String prenom, LocalDate date_naissance, LocalDate date_inscription, TypeUser type) {
+
+    public User(String nom, String prenom, LocalDate date_naissance, TypeUser type) {
         this.nom = nom;
         this.prenom = prenom;
         this.date_naissance = date_naissance;
-        this.date_inscription = date_inscription;
         this.type = type;
     }
 
@@ -43,19 +43,21 @@ public class User {
         this.date_naissance = date_naissance;
     }
 
-    public LocalDate getDate_inscription() {
-        return date_inscription;
-    }
-
-    public void setDate_inscription(LocalDate date_inscription) {
-        this.date_inscription = date_inscription;
-    }
-
     public TypeUser getType() {
         return type;
     }
 
     public void setType(TypeUser type) {
         this.type = type;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
+                ", date_naissance=" + date_naissance +
+                ", type=" + type +
+                '}';
     }
 }

@@ -3,21 +3,21 @@ package Class.Driver;
 import Class.User.TypeUser;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Driver {
 
     private String nom;
     private String prenom;
     private LocalDate date_naissance;
-    private LocalDate date_inscription;
     private TypeDriver type;
 
     public Driver() {}
-    public Driver(String nom, String prenom, LocalDate date_naissance, LocalDate date_inscription, TypeDriver type) {
+
+    public Driver(String nom, String prenom, LocalDate date_naissance, TypeDriver type) {
         this.nom = nom;
         this.prenom = prenom;
         this.date_naissance = date_naissance;
-        this.date_inscription = date_inscription;
         this.type = type;
     }
 
@@ -43,14 +43,6 @@ public class Driver {
 
     public void setDate_naissance(LocalDate date_naissance) {
         this.date_naissance = date_naissance;
-    }
-
-    public LocalDate getDate_inscription() {
-        return date_inscription;
-    }
-
-    public void setDate_inscription(LocalDate date_inscription) {
-        this.date_inscription = date_inscription;
     }
 
     public TypeDriver getType() {
