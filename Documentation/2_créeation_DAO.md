@@ -29,3 +29,4 @@ et la vous metter le fichier .jar telechargé.
         while (rs.next()) {
             System.out.println(rs.getString(2));
         }`
+Cela doit vousq revoyer la colone du nom
