@@ -6,3 +6,11 @@ et la methode exectueUptade n'attend pas de reponse (ex insert ou delete).
 ## Explication des attributs
 le premier sert a mettre en relation votre projet Java et la base de donnée.\
 le deuxieme et votre id et le troisieme votre mot de passe.
+## Ajout du fichier jar
+Pour que le DAO marche il vous telecherger un dirver un fichier .jar ici on telecharger le jre8.jar\
+Une fois telecharger sur Intellij (je code sur cette IDE) vous faite click droit sur votre proget\
+puis open Module Setting \
+puis librairie\
++\
+java\
+et la vous metter le fichier .jar telechargé.
