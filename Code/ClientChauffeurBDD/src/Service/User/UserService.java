@@ -89,4 +89,13 @@ public class UserService implements UserInterface {
             return 1;
         }
     }
+
+    public int moyAncUser() throws SQLException {
+        rs = dao.executeQuery("SELECT AVG(DATEDIFF(DAY, date_inscription_u, GETDATE())) AS anciennete_moyenne_jours\n" +
+                "FROM [User]");
+        if (rs.next()) {
+            return rs.getInt("anciennete_moyenne_jours");
+        }
+        return -1;
+    }
 }

@@ -52,4 +52,14 @@ public class Driver {
     public void setType(TypeDriver type) {
         this.type = type;
     }
+
+    @Override
+    public String toString() {
+        return "Driver{" +
+                "nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
+                ", date_naissance=" + date_naissance +
+                ", type=" + type +
+                '}';
+    }
 }
