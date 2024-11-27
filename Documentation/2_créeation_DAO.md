@@ -14,3 +14,18 @@ puis librairie\
 +\
 java\
 et la vous metter le fichier .jar telechargé.
+## Test du DAO
+        `Dao dao = new Dao();
+        ResultSet rs;
+        String rq;
+        rq = "SELECT TOP (1000) [id_u]\n" +
+                "      ,[nom_u]\n" +
+                "      ,[prenom_u]\n" +
+                "      ,[date_naissance_u]\n" +
+                "      ,[date_inscription_u]\n" +
+                "      ,[type_u]\n" +
+                "  FROM [TaxiSimulation].[dbo].[User]";
+        rs = dao.executeQuery(rq);
+        while (rs.next()) {
+            System.out.println(rs.getString(2));
+        }`
