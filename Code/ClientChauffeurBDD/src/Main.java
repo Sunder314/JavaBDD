@@ -1,5 +1,8 @@
+import connection.Dao;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        Dao dao = new Dao();
+
     }
 }
