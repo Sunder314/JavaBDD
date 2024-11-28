@@ -4,8 +4,8 @@ import java.sql.*;
 
 public class Dao {
         private final String dbUrl = "jdbc:sqlserver://localhost:1433;databaseName=TaxiSimulation";
-        private final String dbUser= "NomUtilisateur";
-        private final String dbPass= "mdp";
+        private final String dbUser= "sa";
+        private final String dbPass= "123";
         private Connection con;
 
         public Dao() {

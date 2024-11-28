@@ -15,6 +15,4 @@ public interface DriverInterface {
     public int nbChauffeurType(TypeDriver type) throws SQLException;
     public void nbChauffeurAllType() throws SQLException;
     public Driver getOlderDriver() throws SQLException;
-
-
 }

@@ -29,7 +29,7 @@ public class Main {
         Course course = new Course(1,2, Time.valueOf("00:12:34"),12.3F);
         CourseService cs = new CourseService();
         Float marge = cs.CalculerMarge(LocalDate.parse("2024-11-27"), LocalDate.parse("2024-11-30"));
-        GenerateUser();
+        
     }
 
     public static User GenerateUser() throws SQLException {
