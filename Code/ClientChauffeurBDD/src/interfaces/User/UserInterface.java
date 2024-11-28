@@ -11,4 +11,5 @@ public interface UserInterface {
     public List<User> getUsers(int limit) throws SQLException;
     public int deleteUser(int id) throws SQLException;
     public boolean chekUser(int id) throws SQLException;
+    public int moyAncUser() throws SQLException;
 }

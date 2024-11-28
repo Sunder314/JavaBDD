@@ -90,7 +90,7 @@ public class DriverService implements DriverInterface {
         }
     }
 
-    public static int nbChauffeurType(TypeDriver type) throws SQLException {
+    public int nbChauffeurType(TypeDriver type) throws SQLException {
         rs = dao.executeQuery(String.format("SELECT COUNT(idD) FROM [Driver] where typeD = '%s'", type.name()));
         if (rs.next()) {
             return rs.getInt(1);
@@ -99,7 +99,8 @@ public class DriverService implements DriverInterface {
     }
 
     public void nbChauffeurAllType() throws SQLException {
-        System.out.printf("['%s' : %d / '%s' : %d]", TypeDriver.MOTARD.name(), nbChauffeurType(TypeDriver.MOTARD), TypeDriver.VOITURE.name(), nbChauffeurType(TypeDriver.VOITURE));
+        DriverService ds = new DriverService();
+        System.out.printf("['%s' : %d / '%s' : %d]", TypeDriver.MOTARD.name(), ds.nbChauffeurType(TypeDriver.MOTARD), TypeDriver.VOITURE.name(), ds.nbChauffeurType(TypeDriver.VOITURE));
     }
 
     public Driver getOlderDriver() throws SQLException {
