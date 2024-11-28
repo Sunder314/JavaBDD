@@ -1,17 +1,22 @@
 package Service.Course;
 
 import Class.Course.Course;
+import Class.Driver.Driver;
+import Class.Driver.TypeDriver;
 import Class.User.TypeUser;
 import Class.User.User;
+import Service.Driver.DriverService;
 import Service.User.UserService;
 import connection.Dao;
 import interfaces.Course.CourseInterface;
 
+import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -119,5 +124,63 @@ public class CourseService implements CourseInterface {
         CourseService cs = new CourseService();
         System.out.printf("Client : '%s %s'  | Nombre de course(s) : %d | " +
                 " Distance parcouru : %f KM",us.getUser(id).getPrenom(),us.getUser(id).getNom(),nbCourseClient(id),distanceClient(id));
+    }
+
+    public List<Driver> DriverMostKM(int limit) throws SQLException {
+        List<Driver> drivers = new ArrayList<>();
+        DriverService ds = new DriverService();
+        rs = dao.executeQuery(String.format("select top (%d) idD,sum(distanceC) as totdist from [Course] Group by idD order by totdist desc;",limit));
+        while (rs.next()) {
+            Driver driver = ds.getDriver(rs.getInt("idD"));
+            drivers.add(driver);
+        }
+        return drivers;
+    }
+
+    public Time TempsMoyTrajet() throws SQLException {
+        rs = dao.executeQuery("SELECT TOP (1) \n" +
+                "       CAST(DATEADD(SECOND, AVG(DATEDIFF(SECOND, '00:00:00', tempsTC)), '00:00:00') AS TIME) AS avg_temps\n" +
+                "FROM [Course];");
+        if (rs.next()) {
+            String validTimeString = removeFraction(rs.getString("avg_temps"));
+            return Time.valueOf(validTimeString);
+        }
+        return null;
+    }
+
+    public float CalculerMarge(LocalDate dateDebut, LocalDate dateFin) throws SQLException {
+        DriverService ds = new DriverService();
+        Float prix = 0F;
+        Float CA = 0F;
+        rs = dao.executeQuery(String.format("select * from [Course] where [dateC] " +
+                "between '%sT00:00:00' and '%sT00:00:00'",dateDebut,dateFin));
+        while (rs.next()) {
+            Driver driver = ds.getDriver(rs.getInt("idD"));
+            String validTimeString = removeFraction(rs.getString("tempsTC"));
+            float distance  = rs.getFloat("distanceC");
+            Time time = Time.valueOf(validTimeString);
+            long seconds = time.toLocalTime().toSecondOfDay();
+            if (driver.getType().name().equals("MOTARD")){
+                prix = 5F + (distance*0.3F) + (seconds*1.5F);
+            } else {
+                prix = 8F + (distance*0.3F) + (seconds*1.5F);
+            }
+            CA = CA + (prix*0.1F);
+        }
+        return CA;
+    }
+
+    public void CA_Anne_mois(int anne) throws SQLException {
+        Arrays Arrays = null;
+        List<String> mois = Arrays.asList("Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout",
+                "Septembre", "Octobre", "Novembre", "Decembre");
+
+        for (int k = 1; k < mois.size(); k++) {
+            System.out.printf(US, "'%s' %.2f €" + "\n", mois.get(k-1), CalculerMarge(LocalDate.of(anne,k,1), LocalDate.of(anne,k+1,1)));
+        }
+        System.out.printf(US, "'%s' %.2f €" + "\n", mois.get(11), CalculerMarge(LocalDate.of(anne,12,1), LocalDate.of(anne,12,31)));
+
+
+
     }
 }
