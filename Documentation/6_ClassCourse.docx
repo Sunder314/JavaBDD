@@ -1,0 +1,137 @@
+Class Course 
+on va mtn creer un Class course comme fait précedemment pour les User Driver.\
+je vous laisser allez voir le code pour miuex comprendre, mais la aussi j'ai incrementer auto le id et le datetime de la commande.\
+Class CourService 
+J'ai tout d'abord fait le crud sans le Update comme pour les classes precedente mais j'ai rajouté d'autre fonction.\
+
+1. distanceClient(int id)
+Calcule la distance totale parcourue par un client spécifique en fonction de son identifiant (id).
+
+Paramètres :
+
+id (int) : Identifiant unique du client.
+Retourne :
+
+float : La somme des distances parcourues par le client.
+-2 : Si aucune donnée n'est trouvée pour le client.
+Exceptions :
+
+SQLException : Si une erreur survient lors de l'exécution de la requête SQL.
+Exemple d'utilisation :
+java
+Copier le code
+float distance = distanceClient(101);
+System.out.println("Distance totale parcourue : " + distance + " km");
+2. nbCourseClient(int id)
+Retourne le nombre de courses effectuées par un client spécifique.
+
+Paramètres :
+
+id (int) : Identifiant unique du client.
+Retourne :
+
+int : Nombre de courses effectuées par le client.
+-2 : Si aucune donnée n'est trouvée pour le client.
+Exceptions :
+
+SQLException : Si une erreur survient lors de l'exécution de la requête SQL.
+Exemple d'utilisation :
+java
+Copier le code
+int nbCourses = nbCourseClient(101);
+System.out.println("Nombre de courses : " + nbCourses);
+3. recapClient(int id)
+Affiche un récapitulatif des informations d'un client : nom, prénom, nombre de courses et distance totale parcourue.
+
+Paramètres :
+
+id (int) : Identifiant unique du client.
+Retourne :
+
+Rien (void). Affiche les informations directement sur la console.
+Exceptions :
+
+SQLException : Si une erreur survient lors de l'exécution des requêtes SQL.
+Exemple d'utilisation :
+java
+Copier le code
+recapClient(101);
+4. DriverMostKM(int limit)
+Retourne une liste des conducteurs ayant parcouru le plus de kilomètres, triés par distance décroissante.
+
+Paramètres :
+
+limit (int) : Nombre maximum de conducteurs à retourner.
+Retourne :
+
+List<Driver> : Liste des conducteurs triés par distance.
+Exceptions :
+
+SQLException : Si une erreur survient lors de l'exécution de la requête SQL.
+Exemple d'utilisation :
+java
+Copier le code
+List<Driver> topDrivers = DriverMostKM(5);
+for (Driver driver : topDrivers) {
+    System.out.println(driver);
+}
+5. TempsMoyTrajet()
+Calcule et retourne le temps moyen des trajets.
+
+Paramètres :
+
+Aucun.
+Retourne :
+
+Time : Temps moyen des trajets au format hh:mm:ss.
+null : Si aucune donnée n'est trouvée.
+Exceptions :
+
+SQLException : Si une erreur survient lors de l'exécution de la requête SQL.
+Exemple d'utilisation :
+java
+Copier le code
+Time avgTime = TempsMoyTrajet();
+System.out.println("Temps moyen des trajets : " + avgTime);
+6. CalculerMarge(LocalDate dateDebut, LocalDate dateFin)
+Calcule la marge générée par toutes les courses effectuées entre deux dates.
+
+Paramètres :
+
+dateDebut (LocalDate) : Date de début de la période.
+dateFin (LocalDate) : Date de fin de la période.
+Retourne :
+
+float : Montant total de la marge générée.
+Exceptions :
+
+SQLException : Si une erreur survient lors de l'exécution de la requête SQL.
+Exemple d'utilisation :
+java
+Copier le code
+float marge = CalculerMarge(LocalDate.of(2024, 1, 1), LocalDate.of(2024, 1, 31));
+System.out.println("Marge générée : " + marge + " €");
+7. CA_Anne_mois(int anne)
+Affiche le chiffre d'affaires (CA) par mois pour une année donnée.
+
+Paramètres :
+
+anne (int) : Année à analyser.
+Retourne :
+
+Rien (void). Affiche les résultats directement sur la console.
+Exceptions :
+
+SQLException : Si une erreur survient lors de l'exécution des requêtes SQL.
+Exemple d'utilisation :
+java
+Copier le code
+CA_Anne_mois(2024);
+Notes supplémentaires
+Gestion des erreurs
+Les méthodes retournent des valeurs spécifiques (-2 ou null) lorsqu'aucune donnée n'est trouvée, pour faciliter la gestion des cas où les résultats sont absents.
+Utilisation des Services
+Les services comme UserService et DriverService sont utilisés pour récupérer des objets User et Driver. Cela montre une séparation logique des responsabilités.
+Requêtes SQL
+Les requêtes SQL utilisent la méthode dao.executeQuery() pour interroger la base de données.
+Les résultats sont analysés à l'aide d'un ResultSet (rs), avec des vérifications pour éviter les exceptions.
